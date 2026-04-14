@@ -1,0 +1,17 @@
+# 🌤️ Aplicación del Clima en Python
+
+## 📌 Descripción del Proyecto
+Esta es una aplicación desarrollada en Python que permite a los usuarios consultar el clima actual y el pronóstico de 5 días de cualquier ciudad.  
+Utiliza la API de Open-Meteo para obtener datos meteorológicos en tiempo real.
+
+---
+
+## 🚀 Funcionalidades
+- Consulta del clima actual (temperatura, viento, dirección)
+- Pronóstico de 5 días (temperaturas máximas y mínimas)
+- Búsqueda por nombre de ciudad
+- Manejo de errores (ciudad inválida, conexión, datos incompletos)
+
+---
+
+## 📁 Estructura del Proyecto
