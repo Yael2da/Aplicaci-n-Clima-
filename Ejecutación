@@ -1,0 +1,19 @@
+```bash
+pip install requests
+
+ejecutacion:
+python app_clima.py
+
+Ejemplo de Salida:
+Ingresa el nombre de la ciudad: Ciudad de México
+
+🌍 Ubicación: Ciudad de México, México
+
+🌤️ Clima actual:
+🌡️ Temperatura: 22 °C
+💨 Viento: 10 km/h
+🧭 Dirección: 180°
+
+📅 Pronóstico (5 días):
+2026-04-14 → 🌡️ Max: 25°C | Min: 12°C
+2026-04-15 → 🌡️ Max: 24°C | Min: 11°C
