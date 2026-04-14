@@ -1,0 +1,95 @@
+import requests
+
+def obtener_coordenadas(ciudad):
+    try:
+        url = f"https://geocoding-api.open-meteo.com/v1/search?name={ciudad}&count=1"
+        response = requests.get(url, timeout=5)
+        data = response.json()
+
+        if "results" not in data:
+            return None, None, "Ciudad no encontrada"
+
+        lat = data["results"][0]["latitude"]
+        lon = data["results"][0]["longitude"]
+        nombre = data["results"][0]["name"]
+        pais = data["results"][0]["country"]
+
+        return lat, lon, f"{nombre}, {pais}"
+
+    except requests.exceptions.RequestException:
+        return None, None, "Error de conexión"
+
+
+def obtener_clima_actual(lat, lon):
+    try:
+        url = f"https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}&current_weather=true"
+        response = requests.get(url, timeout=5)
+        data = response.json()
+
+        if "current_weather" not in data:
+            return None
+
+        return data["current_weather"]
+
+    except requests.exceptions.RequestException:
+        return None
+
+
+def obtener_pronostico(lat, lon):
+    try:
+        url = f"https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}&daily=temperature_2m_max,temperature_2m_min&timezone=auto"
+        response = requests.get(url, timeout=5)
+        data = response.json()
+
+        if "daily" not in data:
+            return None
+
+        return data["daily"]
+
+    except requests.exceptions.RequestException:
+        return None
+
+
+def mostrar_clima(ciudad):
+    if not ciudad:
+        print("❌ Error: Ingresa una ciudad")
+        return
+
+    lat, lon, info = obtener_coordenadas(ciudad)
+
+    if lat is None:
+        print(f"❌ {info}")
+        return
+
+    print(f"\n🌍 Ubicación: {info}")
+
+    # Clima actual
+    clima = obtener_clima_actual(lat, lon)
+
+    if clima:
+        print("\n🌤️ Clima actual:")
+        print(f"🌡️ Temperatura: {clima['temperature']} °C")
+        print(f"💨 Viento: {clima['windspeed']} km/h")
+        print(f"🧭 Dirección: {clima['winddirection']}°")
+    else:
+        print("❌ Error al obtener clima actual")
+
+    # Pronóstico
+    pronostico = obtener_pronostico(lat, lon)
+
+    if pronostico:
+        print("\n📅 Pronóstico (5 días):")
+        dias = pronostico["time"]
+        max_temp = pronostico["temperature_2m_max"]
+        min_temp = pronostico["temperature_2m_min"]
+
+        for i in range(len(dias)):
+            print(f"{dias[i]} → 🌡️ Max: {max_temp[i]}°C | Min: {min_temp[i]}°C")
+    else:
+        print("❌ Error al obtener pronóstico")
+
+
+# Programa principal
+if __name__ == "__main__":
+    ciudad = input("Ingresa el nombre de la ciudad: ")
+    mostrar_clima(ciudad)
