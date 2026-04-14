@@ -17,3 +17,30 @@ Ingresa el nombre de la ciudad: Ciudad de México
 📅 Pronóstico (5 días):
 2026-04-14 → 🌡️ Max: 25°C | Min: 12°C
 2026-04-15 → 🌡️ Max: 24°C | Min: 11°C
+
+
+API utilizada
+
+Este proyecto utiliza:
+
+API de Geocodificación de Open-Meteo
+API de Pronóstico del Clima de Open-Meteo
+
+No requiere clave de API.
+
+Uso de Inteligencia Artificial
+
+Durante el desarrollo se utilizó IA para:
+
+Generar código inicial
+Mejorar funciones
+Implementar nuevas características (pronóstico de 5 días)
+Crear pruebas y documentación
+
+Todo el código fue revisado y probado manualmente.
+
+Mejoras futuras
+Interfaz gráfica (GUI)
+Más variables meteorológicas (humedad, lluvia)
+Comparación entre múltiples ciudades
+Guardar historial de búsquedas
